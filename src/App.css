@@ -86,11 +86,20 @@ img {
     font-weight: bolder;
 }
 
-.subscribers {
+.subscribers-green {
     color: #505573;
     font-weight: bolder;
     margin-top: 10px;
     font-size: larger;
+    background-color: #429189;
+}
+
+.subscribers-red {
+    color: #505573;
+    font-weight: bolder;
+    margin-top: 10px;
+    font-size: larger;
+    background-color: #82455C;
 }
 
 .difference {

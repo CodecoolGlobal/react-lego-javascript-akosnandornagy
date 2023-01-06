@@ -1,43 +1,40 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import { useState } from "react";
+import "./App.css";
 import data from "./sampleData";
 import AddNewCard from "./components/addNewCard";
+import Header from "./components/header";
+import Card from "./components/card";
 
 function App() {
-    console.log(data)
-    return (
-        <div className="root">
-            <div className="header">
-                Social Media Dashboard
-                <div className="sub-header">
-                    Total followers: 33
-                </div>
-            </div>
+  const [usersData, setUsersData] = useState(data);
+  const [followers, setFollowers] = useState(
+    data.users.map((user) => user.followers)
+  );
+  //console.log(data);
+  return (
+    <div className="root">
+      <Header followers={followers} />
 
-            <section className="platform">
-                <div className="icon" >
-                    <img src={data.icon}></img>
-                    <p>{data.users[0].name}</p>
-                </div>
-                <div className="followers">
-                    <button className="update-followers-button">-</button>
-                    {data.users[0].followers}
-                    <button className="update-followers-button">+</button>
-                </div>
-                <div className="subscribers">
-                    F O L O W E R S
-                </div>
-                <div>
-                    <span className='trend-ascend'>▼</span>
-                    <span className='trend-descend'>▼</span>
-                    {data.users[0].difference}
-                </div>
-            </section>
+      {usersData.users.map((user, index) => (
+        <Card
+          user={user}
+          key={user.name}
+          icon={data.icon}
+          followers={followers}
+          setFollowers={setFollowers}
+          index={index}
+        />
+      ))}
 
-            <AddNewCard></AddNewCard>
-        </div>
-    )
+      <AddNewCard
+        usersData={usersData}
+        setUsersData={setUsersData}
+        allFollowers={followers}
+        allSetFollowers={setFollowers}
+      />
+    </div>
+  );
 }
-
 
 export default App;
